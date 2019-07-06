@@ -142,6 +142,23 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     }
 
+    public Node<T> predecessor(Node<T> node) {
+
+        if (node.left != null) {
+            return max(node.left);
+        }
+
+        Node<T> parent = node.parent;
+
+        while (parent != null && node == parent.left) {
+            node = parent;
+            parent = parent.parent;
+        }
+
+        return parent;
+
+    }
+
     private void printInOrder(Node<T> node) {
         if (node == null) {
             return;
@@ -175,7 +192,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
         searchTree.printInOrder();
 
-        System.out.println("Successor: " + searchTree.successor(searchTree.search(15)).key);
+        System.out.println("Successor: " + searchTree.predecessor(searchTree.search(11)).key);
 
     }
 

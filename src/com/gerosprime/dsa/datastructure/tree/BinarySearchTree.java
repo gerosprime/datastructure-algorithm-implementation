@@ -22,9 +22,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
         this.root = root;
     }
 
-    public Node<T> min() {
+    private Node<T> min(Node<T> node) {
 
-        Node<T> trail = root;
+        Node<T> trail = node;
 
         while (trail.left != null) {
             trail = trail.left;
@@ -32,6 +32,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
         return trail;
 
+    }
+
+    public Node<T> min() {
+        return min(root);
     }
 
     private Node<T> minRecursive(Node<T> node) {
@@ -54,9 +58,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     }
 
-    public Node<T> max() {
+    public Node<T> max(Node<T> node) {
 
-        Node<T> trail = root;
+        Node<T> trail = node;
 
         while (trail.right != null) {
             trail = trail.right;
@@ -64,6 +68,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
         return trail;
 
+    }
+
+    public Node<T> max() {
+        return max(root);
     }
 
     public Node<T> search(T key) {
@@ -117,6 +125,22 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     }
 
+    public Node<T> successor(Node<T> node) {
+
+        if (node.right != null) {
+            return min(node.right);
+        }
+
+        Node<T> parent = node.parent;
+
+        while (parent != null && node == parent.right) {
+            node = parent;
+            parent = parent.parent;
+        }
+
+        return parent;
+
+    }
 
     private void printInOrder(Node<T> node) {
         if (node == null) {
@@ -143,10 +167,15 @@ public class BinarySearchTree<T extends Comparable<T>> {
         searchTree.insert(new Node<>(10));
         searchTree.insert(new Node<>(9));
         searchTree.insert(new Node<>(8));
+        searchTree.insert(new Node<>(22));
+        searchTree.insert(new Node<>(12));
+        searchTree.insert(new Node<>(11));
+        searchTree.insert(new Node<>(13));
+        searchTree.insert(new Node<>(14));
 
         searchTree.printInOrder();
 
-        System.out.println(searchTree.search(9).key);
+        System.out.println("Successor: " + searchTree.successor(searchTree.search(15)).key);
 
     }
 

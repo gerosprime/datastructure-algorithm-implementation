@@ -7,13 +7,17 @@ import java.util.Queue;
 public class BreadthFirstSearch {
 
     public static void main(String[] args) {
-        GraphAdjacencyList graphAdjacencyList = new GraphAdjacencyList(5);
+        GraphAdjacencyList graphAdjacencyList = new GraphAdjacencyList(8);
 
         graphAdjacencyList.addEdge(0, 2, true);
         graphAdjacencyList.addEdge(0, 1, true);
         graphAdjacencyList.addEdge(3, 2, true);
         graphAdjacencyList.addEdge(1, 3, true);
         graphAdjacencyList.addEdge(4, 3, true);
+        graphAdjacencyList.addEdge(1, 4, true);
+        graphAdjacencyList.addEdge(4, 5, true);
+        graphAdjacencyList.addEdge(6, 4, true);
+        graphAdjacencyList.addEdge(5, 7, true);
 
         new BreadthFirstSearch().traverse(graphAdjacencyList);
     }
